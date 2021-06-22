@@ -34,20 +34,16 @@ btnOpen.addEventListener('click', () => {
   };
   websocket.onmessage = function(evt) {
     writeToScreen(
-      'Сообщение сервера: ' + evt.data+'</span>',"server"
+      'Сообщение сервера: ' + evt.data+'',"server"
     );
   };
   websocket.onerror = function(evt) {
     writeToScreen(
-      'ERROR:</span> ' + evt.data,"server"
+      'ERROR:' + evt.data,"server"
     );
   };
 });
 
-// btnClose.addEventListener('click', () => {
-//   websocket.close();
-//   websocket = null;
-// });
 
 btnSend.addEventListener('click', () => {
   let message = inputMsg.value;
@@ -64,13 +60,7 @@ btnSend.addEventListener('click', () => {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
       writeToScreen("Сообщение отправителя: Запрос Гео-локация");
-      websocket.send(`/#map=11/${latitude}/${longitude}`);
-
-      websocket.onmessage = function(evt) {
-        writeToScreen(
-          'Сообщение сервера: <a href="https://www.openstreetmap.org/' + evt.data+'">Посмотреть гео-локацию</a>',"server"
-        );
-      };
+      websocket.send(`<a target="_blank" href="https://www.openstreetmap.org/#map=11/${latitude}/${longitude}">Посмотреть гео-локацию</a>`);
 
     }
   
